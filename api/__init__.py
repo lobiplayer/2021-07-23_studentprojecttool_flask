@@ -16,4 +16,7 @@ def create_app():
     from .views import main
     app.register_blueprint(main)
 
+    from .rewardsviews import rewards
+    app.register_blueprint(rewards)
+
     return app
