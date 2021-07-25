@@ -42,7 +42,7 @@ def add_deadline():
 
     deadline_data = request.get_json()
 
-    new_deadline = Deadline(description=deadline_data['description'], date=deadline_data['date'], subject=deadline_data['subject'], user_id=random.randint(1, 1000000), created_at = datetime.datetime.now(), updated_at= None)
+    new_deadline = Deadline(description=deadline_data['description'], date=datetime.datetime(deadline_data['date']), subject=deadline_data['subject'], user_id=random.randint(1, 1000000), created_at = datetime.datetime.now(), updated_at= None)
 
     db.session.add(new_deadline)
     db.session.commit()
@@ -55,6 +55,6 @@ def deadlines():
     deadlines = []
 
     for deadline in deadline_list:
-        deadlines.append({'id':deadline.id ,'deadline_description': deadline.description, 'deadline_date': deadline.date, 'subject': deadline.subject, 'user_id': deadline.user_id, 'created_at': deadline.created_at, 'updated_at': deadline.updated_at})
+        deadlines.append({'id':deadline.id ,'description': deadline.description, 'date': deadline.date, 'subject': deadline.subject, 'user_id': deadline.user_id, 'created_at': deadline.created_at, 'updated_at': deadline.updated_at})
 
     return jsonify({'deadlines' : deadlines})

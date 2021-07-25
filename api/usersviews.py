@@ -13,7 +13,7 @@ def add_user():
     user_data = request.get_json()
 
     new_user = User(name=user_data['name'], email=user_data['email'], password=user_data['password'],
-                    date_of_birth=user_data['date_of_birth'],  created_at=user_data['created_at'],  updated_at=user_data['updated_at'])
+                    date_of_birth=user_data['date_of_birth'],   created_at = datetime.datetime.now(),  updated_at= None)
 
     db.session.add(new_user)
     db.session.commit()
