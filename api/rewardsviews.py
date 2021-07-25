@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify, request
 from . import db
-from .rewardsmodel import Rewardsoutput
 from .rewardsmodel import RewardsList
 import datetime
 import random
@@ -14,7 +13,33 @@ def add_rewardslist():
 
     rewards_data = request.get_json()
     print(rewards_data)
-    new_rewards = RewardsList(points=rewards_data.points, user_id = rewards_data.user_id, task_completed = rewards_data.task_completed, state = "Blooming")
+
+    latest_state = RewardsList.query.filter_by(user_id = rewards_data['user_id']).order_by(RewardsList.id.desc()).first()
+    
+    set_state = ""
+    
+    if latest_state:
+        if latest_state.state == "Seedling":
+            set_state = "Germination"
+        
+        elif latest_state.state == "Germination":
+            set_state = "Shoots"
+        
+        elif latest_state.state == "Shoots":
+            set_state = "Budding"
+
+        elif latest_state.state == "Budding":
+            set_state = "Blooming"
+
+        else: 
+            set_state = "Seedling"
+
+    else:
+        set_state = "Seedling"
+    
+
+    new_rewards = RewardsList(points=rewards_data['points'], user_id = rewards_data['user_id'], 
+    task_completed = rewards_data['task_completed'], state = set_state)
 
 #saving it to the database:
     db.session.add(new_rewards)
@@ -29,7 +54,7 @@ def rewardslist():
 
 
 # geting the Todo records from the database. here we have to make where todo.user_id == currentuser
-    rewards_list = RewardsList.query.all()
+    rewards_list = RewardsList.query.filter_by(user_id = 3)
     #this is the list that will be send to the react app:
     rewardslist = []
 
@@ -41,4 +66,4 @@ def rewardslist():
     return jsonify({'rewardslist' : rewardslist})
 
 
-# @rewards.route('/rewardslist', methods=['GET'])
+
