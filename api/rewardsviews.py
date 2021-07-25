@@ -40,3 +40,5 @@ def rewardslist():
 #this will be send to the client (this will be the response for the get request)
     return jsonify({'rewardslist' : rewardslist})
 
+
+# @rewards.route('/rewardslist', methods=['GET'])
