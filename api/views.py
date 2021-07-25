@@ -47,6 +47,8 @@ def add_deadline():
     db.session.add(new_deadline)
     db.session.commit()
 
+    return 'Done', 201
+
 @main.route('/deadlines', methods=['GET'])
 def deadlines():
     deadline_list = Deadline.query.all()
