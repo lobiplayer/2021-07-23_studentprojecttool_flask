@@ -66,4 +66,20 @@ def rewardslist():
     return jsonify({'rewardslist' : rewardslist})
 
 
+@rewards.route('/rewardslist_totalpoints', methods=['GET'])
+def rewardslist_totalpoints():
+
+# geting the Todo records from the database. here we have to make where todo.user_id == currentuser
+    rewards_list = RewardsList.query.filter_by(user_id = 3)
+    #this is the list that will be send to the react app:
+    total_points = 0
+    for value in rewards_list:
+        total_points += value.points
+
+#every todo from the database will be formatted in a dictionary, this will be appended to the todos list (2 lines back)
+    print(total_points)
+
+#this will be send to the client (this will be the response for the get request)
+    return jsonify({'total_points' : total_points})
+
 
