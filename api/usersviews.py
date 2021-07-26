@@ -39,3 +39,30 @@ def user():
                       'password': user.password, 'date_of_birth': user.date_of_birth})
 
     return jsonify({'users': users})
+
+
+@users.route('/user_login', methods=['POST'])
+def user_login():
+
+    login_data = request.get_json()
+    print(login_data)
+
+    check_email = User.query.filter_by(email = login_data['email']).first()
+
+    user_id = ""
+
+    if (check_email):
+        if check_email.password == login_data['password']:
+            user_id = check_email.id
+            print(user_id)
+            return jsonify({'user_id': user_id})
+        
+        else:
+            print(user_id)
+            return jsonify({'user_id': user_id})
+    
+    else:
+        print(user_id)
+        return jsonify({'user_id': user_id})
+
+
