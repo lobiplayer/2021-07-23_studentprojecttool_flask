@@ -49,28 +49,33 @@ def add_rewardslist():
 
 
 
-@rewards.route('/rewardslist', methods=['GET'])
+@rewards.route('/rewardslist', methods=['POST'])
 def rewardslist():
 
-
+    rewards_data = request.get_json()
+    print('rewards')
+    print(rewards_data)
 # geting the Todo records from the database. here we have to make where todo.user_id == currentuser
-    rewards_list = RewardsList.query.filter_by(user_id = 3)
+    rewards_list = RewardsList.query.filter_by(user_id = rewards_data['user_id'])
     #this is the list that will be send to the react app:
-    rewardslist = []
+    rewardslist = [[{'points':0 ,'user_id': rewards_data['user_id'], 'task_completed': 'Welcome! Start your garden today!', 'state': "Packet"}]]
 
 #every todo from the database will be formatted in a dictionary, this will be appended to the todos list (2 lines back)
     for data in rewards_list:
         rewardslist.append([{'points':data.points ,'user_id': data.user_id, 'task_completed': data.task_completed, 'state': data.state}])
 
+    print(rewardslist)
 #this will be send to the client (this will be the response for the get request)
     return jsonify({'rewardslist' : rewardslist})
 
 
-@rewards.route('/rewardslist_totalpoints', methods=['GET'])
+@rewards.route('/rewardslist_totalpoints', methods=['POST'])
 def rewardslist_totalpoints():
 
+    rewards_data = request.get_json()
+
 # geting the Todo records from the database. here we have to make where todo.user_id == currentuser
-    rewards_list = RewardsList.query.filter_by(user_id = 3)
+    rewards_list = RewardsList.query.filter_by(user_id = rewards_data['user_id'])
     #this is the list that will be send to the react app:
     total_points = 0
     for value in rewards_list:

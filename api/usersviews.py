@@ -75,3 +75,21 @@ def user_login():
         return jsonify({'user_id': user_id})
 
 
+@users.route('/user_info', methods=['POST'])
+def user_info():
+
+    user_id = request.get_json()
+    print(user_id)
+
+    get_user = User.query.filter_by(id = user_id['user_id']).first()
+
+    user_info = []
+
+    user_info.append(get_user.name)
+    user_info.append(get_user.email)
+
+    print(user_info)
+
+    return jsonify({'user_info': user_info})
+
+
