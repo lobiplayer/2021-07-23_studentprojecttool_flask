@@ -10,22 +10,31 @@ users = Blueprint('users', __name__)
 @users.route('/add_user', methods=['POST'])
 def add_user():
 
-    # user_data = request.get_json()
+    user_data = request.get_json()
+
+    print(user_data)
 
     # token = ''.join(random.choice(characters) for i in range(15))
 
-    # new_user = User(name=user_data['name'], email=user_data['email'], password=user_data['password'], 
-    #                 date_of_birth=user_data['date_of_birth'],   created_at = datetime.datetime.now(),  updated_at= None)
-
-
-    new_user = User(name='Testing', email='testing@gmail.com', password='Testing123$$$',
-                    date_of_birth='01-01-2020')
+    new_user = User(name=user_data['name'], email=user_data['email'], password=user_data['password'], date_of_birth=user_data['date_of_birth'])
 
     db.session.add(new_user)
     db.session.commit()
 
+    login_user = User.query.filter_by(email = user_data['email']).first()
 
-    return 'User Created', 201
+    user_id = ""
+
+    if (login_user):
+        user_id = login_user.id 
+        print(user_id)
+        return jsonify({'user_id': user_id})
+        
+        
+    else:
+        print(user_id)
+        return jsonify({'user_id': user_id})
+
 
 
 @users.route('/users')
