@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
-from . import db
-from .rewardsmodel import RewardsList
+from __init__ import db
+from rewardsmodel import RewardsList
 import datetime
 import random
 

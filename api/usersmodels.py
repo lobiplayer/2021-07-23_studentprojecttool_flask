@@ -1,5 +1,5 @@
-from . import db
-from .rewardsmodel import RewardsList
+from __init__ import db
+from rewardsmodel import RewardsList
 
 
 class User(db.Model):
