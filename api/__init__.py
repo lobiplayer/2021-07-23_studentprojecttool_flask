@@ -9,22 +9,21 @@ load_dotenv()
 db = SQLAlchemy()
 
 
-def create_app():
-    app = Flask(__name__)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app = Flask(__name__)
 
-    db.init_app(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
-    migrate = Migrate(app, db)
+db.init_app(app)
 
-    from .views import main
-    app.register_blueprint(main)
+migrate = Migrate(app, db)
 
-    from .rewardsviews import rewards
-    app.register_blueprint(rewards)
+from .views import main
+app.register_blueprint(main)
 
-    from .usersviews import users
-    app.register_blueprint(users)
+from .rewardsviews import rewards
+app.register_blueprint(rewards)
 
-    return app
+from .usersviews import users
+app.register_blueprint(users)
+
