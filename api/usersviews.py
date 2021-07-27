@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
-from . import db
-from .usersmodels import User
+from __init__ import db
+from usersmodels import User
 import datetime
 import random
 
