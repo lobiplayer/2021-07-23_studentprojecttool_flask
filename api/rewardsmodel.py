@@ -1,6 +1,6 @@
-from __init__ import db
+from flask_sqlalchemy import SQLAlchemy
 
-
+db = SQLAlchemy()
 # class Rewardsoutput(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
 #     image_url = db.Column(db.Text)

@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request
-from __init__ import db
 from usersmodels import User
 import datetime
 import random
-
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 users = Blueprint('users', __name__)
 
 
