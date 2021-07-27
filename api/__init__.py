@@ -17,8 +17,11 @@ def create_app():
 
     migrate = Migrate(app, db)
 
-    from .views import main
-    app.register_blueprint(main)
+    from .deadlinesviews import deadlines
+    app.register_blueprint(deadlines)
+
+    from .todosviews import todos
+    app.register_blueprint(todos)
 
     from .rewardsviews import rewards
     app.register_blueprint(rewards)

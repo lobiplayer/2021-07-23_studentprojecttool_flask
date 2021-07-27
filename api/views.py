@@ -49,16 +49,6 @@ def add_deadline():
 
     return 'Done', 201
 
-# @main.route('/deadlines', methods=['GET'])
-# def deadlines():
-#     deadline_list = Deadline.query.all()
-#     deadlines = []
-
-#     for deadline in deadline_list:
-#         deadlines.append({'id':deadline.id ,'description': deadline.description, 'deadline_date': deadline.date, 'subject': deadline.subject, 'user_id': deadline.user_id, 'created_at': deadline.created_at, 'updated_at': deadline.updated_at})
-
-#     return jsonify({'deadlines' : deadlines})
-
 @main.route('/deadlines', methods=['POST'])
 def deadlines():
 
