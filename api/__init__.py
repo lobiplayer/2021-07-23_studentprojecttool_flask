@@ -3,6 +3,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
+from .views import main
+from .rewardsviews import rewards
+from .usersviews import users
 
 load_dotenv()
 
@@ -18,13 +21,10 @@ db.init_app(app)
 
 migrate = Migrate(app, db)
 
-from .views import main
 app.register_blueprint(main)
 
-from .rewardsviews import rewards
 app.register_blueprint(rewards)
 
-from .usersviews import users
 app.register_blueprint(users)
 
 app.run()
