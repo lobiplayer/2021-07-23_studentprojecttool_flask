@@ -58,3 +58,25 @@ def deadlines():
         deadlines.append({'id':deadline.id ,'description': deadline.description, 'deadline_date': deadline.date, 'subject': deadline.subject, 'user_id': deadline.user_id, 'created_at': deadline.created_at, 'updated_at': deadline.updated_at})
 
     return jsonify({'deadlines' : deadlines})
+
+
+
+@main.route('/todolist_homepage', methods=['POST'])
+def todolist_homepage():
+
+    user_id = request.get_json()
+    print('homepage')
+    print(user_id)
+# geting the Todo records from the database. here we have to make where todo.user_id == currentuser
+    oldest_todo = Todo.query.filter_by(user_id = user_id['user_id']).limit(5)
+    #this is the list that will be send to the react app:
+    todolist_homepage = []
+    print(oldest_todo)
+
+#every todo from the database will be formatted in a dictionary, this will be appended to the todos list (2 lines back)
+    for data in oldest_todo:
+        todolist_homepage.append({'todo_text':data.todo_text ,'deadline_id': data.deadline_id})
+
+    print(todolist_homepage)
+#this will be send to the client (this will be the response for the get request)
+    return jsonify({'todolist_homepage' : todolist_homepage})
