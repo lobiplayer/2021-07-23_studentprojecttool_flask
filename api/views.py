@@ -13,7 +13,7 @@ def add_todo():
     #getting the information from the POST request in json format:
     todo_data = request.get_json()
 # adding a new record for the database. deadline_id and user_id are set as random number for now:
-    new_todo = Todo(todo_text=todo_data['todo_text'], is_done=False, deadline_id=random.randint(1, 1000000), user_id=random.randint(1, 1000000), created_at = datetime.datetime.now(), updated_at= None)
+    new_todo = Todo(todo_text=todo_data['todo_text'], is_done=False, deadline_id=random.randint(1, 1000000), user_id=todo_data["user_id"], created_at = datetime.datetime.now(), updated_at= None)
 
 #saving it to the database:
     db.session.add(new_todo)
@@ -21,17 +21,19 @@ def add_todo():
 
     return 'Done', 201
 
-@main.route('/todos', methods=['GET'])
+@main.route('/todos', methods=['POST'])
 def todos():
 
+    user_id = request.get_json()
+
 # geting the Todo records from the database. here we have to make where todo.user_id == currentuser
-    todo_list = Todo.query.all()
+    todo_list = Todo.query.filter_by(user_id=user_id['user_id'])
     #this is the list that will be send to the react app:
     todos = []
 
 #every todo from the database will be formatted in a dictionary, this will be appended to the todos list (2 lines back)
     for todo in todo_list:
-        todos.append({'id':todo.id ,'todo_text': todo.todo_text, 'is_done': todo.is_done, 'deadline_id': todo.deadline_id, 'user_id': todo.user_id, 'created_at': todo.created_at, 'updated_at': todo.updated_at})
+        todos.append({'id':todo.id ,'todo_text': todo.todo_text, 'is_done': todo.is_done, 'deadline_id': todo.deadline_id, 'user_id': user_id['user_id'], 'created_at': todo.created_at, 'updated_at': todo.updated_at})
 
 #this will be send to the client (this will be the response for the get request)
     return jsonify({'todos' : todos})
