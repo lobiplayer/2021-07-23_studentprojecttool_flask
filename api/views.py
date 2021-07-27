@@ -123,4 +123,4 @@ def test():
         todos.append({'id':todo.id ,'todo_text': todo.todo_text, 'is_done': todo.is_done, 'deadline_id': todo.deadline_id, 'user_id': todo.id, 'created_at': todo.created_at, 'updated_at': todo.updated_at})
 
 #this will be send to the client (this will be the response for the get request)
-    return "hello its working"
+    return jsonify({'todos' : todos})
