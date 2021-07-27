@@ -27,3 +27,4 @@ app.register_blueprint(rewards)
 from .usersviews import users
 app.register_blueprint(users)
 
+app.run()
