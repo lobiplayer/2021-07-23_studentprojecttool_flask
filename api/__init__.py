@@ -26,5 +26,3 @@ app.register_blueprint(main)
 app.register_blueprint(rewards)
 
 app.register_blueprint(users)
-
-app.run()
