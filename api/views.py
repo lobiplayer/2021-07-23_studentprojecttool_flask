@@ -69,9 +69,8 @@ def delete_todos():
 
     todo_data = request.get_json()
 
-    delete_todo = Todo.query.filter_by(id= todo_data['todo_id']).first()
+    delete_todo = Todo.query.filter_by(id= todo_data['todo_id']).delete()
 
-    db.session.delete(delete_todo)
     db.session.commit()
 
     todo_list = Todo.query.filter_by(user_id=todo_data['user_id'])
