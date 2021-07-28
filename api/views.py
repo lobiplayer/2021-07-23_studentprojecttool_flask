@@ -53,7 +53,16 @@ def update_todos():
         update_todo.is_done = True
         db.session.commit()
 
-    return 'record updated', 201
+    todo_list = Todo.query.filter_by(user_id=user_id['user_id'])
+    #this is the list that will be send to the react app:
+    todos = []
+
+#every todo from the database will be formatted in a dictionary, this will be appended to the todos list (2 lines back)
+    for todo in todo_list:
+        todos.append({'id':todo.id ,'todo_text': todo.todo_text, 'is_done': todo.is_done, 'deadline_id': todo.deadline_id, 'user_id': user_id['user_id'], 'created_at': todo.created_at, 'updated_at': todo.updated_at})
+
+#this will be send to the client (this will be the response for the get request)
+    return jsonify({'todos' : todos})
 
 
 
