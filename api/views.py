@@ -97,7 +97,7 @@ def delete_todos():
 def add_deadline():
 
     deadline_data = request.get_json()
-
+    print(deadline_data)
     new_deadline = Deadline(description=deadline_data['description'], date=deadline_data['date'], subject=deadline_data['subject'], user_id=deadline_data['user_id'], created_at = datetime.datetime.now(), updated_at= None)
 
     db.session.add(new_deadline)
@@ -140,7 +140,8 @@ def todolist_homepage():
 
 #every todo from the database will be formatted in a dictionary, this will be appended to the todos list (2 lines back)
     for data in oldest_todo:
-        todolist_homepage.append({'todo_text':data.todo_text ,'deadline_id': data.deadline_id})
+        if data.is_done == False:
+            todolist_homepage.append({'todo_text':data.todo_text ,'deadline_id': data.deadline_id})
 
     print(todolist_homepage)
 #this will be send to the client (this will be the response for the get request)
@@ -162,7 +163,8 @@ def deadline_homepage():
 
 #every todo from the database will be formatted in a dictionary, this will be appended to the todos list (2 lines back)
     for data in deadline:
-        deadline_homepage.append({'date':data.date ,'subject': data.subject, 'description': data.description})
+        if data.date > datetime.datetime.now():
+            deadline_homepage.append({'date':data.date ,'subject': data.subject, 'description': data.description})
 
     print(deadline_homepage)
 #this will be send to the client (this will be the response for the get request)
