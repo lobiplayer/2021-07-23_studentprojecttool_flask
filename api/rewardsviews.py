@@ -14,8 +14,7 @@ def add_rewardslist():
     rewards_data = request.get_json()
     print(rewards_data)
 
-    latest_state = RewardsList.query.filter_by(user_id = rewards_data['user_id']).order_by(RewardsList.id.desc()).first()
-    update_todo = Todo.query.filter_by(id= rewards_data['todo_id'])   
+    latest_state = RewardsList.query.filter_by(user_id = rewards_data['user_id']).order_by(RewardsList.id.desc()).first()  
     set_state = ""
     
     if latest_state:
