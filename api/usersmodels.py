@@ -1,4 +1,4 @@
-from rewardsmodel import RewardsList
+from .rewardsmodel import RewardsList
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()

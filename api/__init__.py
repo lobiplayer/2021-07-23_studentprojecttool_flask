@@ -3,9 +3,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
-from views import main
-from rewardsviews import rewards
-from usersviews import users
+from .views import main
+from .rewardsviews import rewards
+from .usersviews import users
 
 load_dotenv()
 

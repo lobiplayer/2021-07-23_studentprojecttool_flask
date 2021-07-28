@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
-from models import Todo
-from models import Deadline
+from .models import Todo
+from .models import Deadline
 import datetime
 import random
 from datetime import date

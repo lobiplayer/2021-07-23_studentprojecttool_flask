@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from rewardsmodel import RewardsList
+from .rewardsmodel import RewardsList
 import datetime
 import random
 from flask_sqlalchemy import SQLAlchemy

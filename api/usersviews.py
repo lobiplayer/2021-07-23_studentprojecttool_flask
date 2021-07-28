@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from usersmodels import User
+from .usersmodels import User
 import datetime
 import random
 from flask_sqlalchemy import SQLAlchemy
