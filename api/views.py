@@ -46,8 +46,12 @@ def update_todos():
     todo_data = request.get_json()
 
     update_todo = Todo.query.filter_by(id= todo_data['todo_id']).first()
-    update_todo.is_done = True
-    db.session.commit()
+    if update_todo.is_done == True:
+        update_todo.is_done = False
+        db.session.commit()
+    else:
+        update_todo.is_done = True
+        db.session.commit()
 
     return 'record updated', 201
 
