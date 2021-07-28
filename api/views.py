@@ -40,6 +40,19 @@ def todos():
     return jsonify({'todos' : todos})
 
 
+@main.route('/update_todos', methods=['POST'])
+def update_todos():
+
+    todo_data = request.get_json()
+
+    update_todo = Todo.query.filter_by(id= todo_data['todo_id']).first()
+    update_todo.is_done = True
+    db.session.commit()
+
+    return 'record updated', 201
+
+
+
 @main.route('/add_deadline', methods=['POST'])
 def add_deadline():
 

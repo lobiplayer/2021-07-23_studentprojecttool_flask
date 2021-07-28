@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from .rewardsmodel import RewardsList
 import datetime
 import random
+from .models import Todo
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 rewards = Blueprint('rewards', __name__)
@@ -14,7 +15,7 @@ def add_rewardslist():
     print(rewards_data)
 
     latest_state = RewardsList.query.filter_by(user_id = rewards_data['user_id']).order_by(RewardsList.id.desc()).first()
-    
+    update_todo = Todo.query.filter_by(id= rewards_data['todo_id'])   
     set_state = ""
     
     if latest_state:
