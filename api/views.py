@@ -163,8 +163,7 @@ def deadline_homepage():
 
 #every todo from the database will be formatted in a dictionary, this will be appended to the todos list (2 lines back)
     for data in deadline:
-        if data.date > datetime.datetime.now():
-            deadline_homepage.append({'date':data.date ,'subject': data.subject, 'description': data.description})
+        deadline_homepage.append({'date':data.date ,'subject': data.subject, 'description': data.description})
 
     print(deadline_homepage)
 #this will be send to the client (this will be the response for the get request)
