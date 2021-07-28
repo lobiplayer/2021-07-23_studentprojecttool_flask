@@ -6,6 +6,7 @@ import os
 from .views import main
 from .rewardsviews import rewards
 from .usersviews import users
+import re
 
 load_dotenv()
 
@@ -15,7 +16,7 @@ db = SQLAlchemy()
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = re.sub('postgres', 'postgresql', os.environ.get('DATABASE_URL'))
 
 db.init_app(app)
 
