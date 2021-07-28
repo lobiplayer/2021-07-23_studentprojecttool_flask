@@ -103,7 +103,13 @@ def add_deadline():
     db.session.add(new_deadline)
     db.session.commit()
 
-    return 'Done', 201
+    deadline_list = Deadline.query.filter_by(user_id = deadline_data['user_id'])
+    deadlines = []
+    #this is the list that will be send to the react app:
+    for deadline in deadline_list:
+        deadlines.append({'id':deadline.id ,'description': deadline.description, 'deadline_date': deadline.date, 'subject': deadline.subject, 'user_id': deadline.user_id, 'created_at': deadline.created_at, 'updated_at': deadline.updated_at})
+
+    return jsonify({'deadlines' : deadlines})
 
 @main.route('/deadlines', methods=['POST'])
 def deadlines():
