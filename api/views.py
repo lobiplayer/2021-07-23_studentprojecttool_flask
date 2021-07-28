@@ -1,11 +1,11 @@
 from flask import Blueprint, jsonify, request
-from __init__ import db
-from models import Todo
-from models import Deadline
+from flask_sqlalchemy import SQLAlchemy
+from .models import Todo
+from .models import Deadline
 import datetime
 import random
 from datetime import date
-
+db = SQLAlchemy()
 main = Blueprint('main', __name__)
 
 @main.route('/add_todo', methods=['POST'])

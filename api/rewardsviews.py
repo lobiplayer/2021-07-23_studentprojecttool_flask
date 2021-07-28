@@ -1,10 +1,9 @@
 from flask import Blueprint, jsonify, request
-from __init__ import db
-from rewardsmodel import RewardsList
+from .rewardsmodel import RewardsList
 import datetime
 import random
-
-
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 rewards = Blueprint('rewards', __name__)
 
 

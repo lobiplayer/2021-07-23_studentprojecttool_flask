@@ -1,6 +1,6 @@
-from __init__ import db
+from flask_sqlalchemy import SQLAlchemy
 
-
+db = SQLAlchemy()
 # class Rewardsoutput(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
 #     image_url = db.Column(db.Text)
@@ -11,7 +11,7 @@ from __init__ import db
 class RewardsList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     points = db.Column(db.Integer, nullable = False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer)
     task_completed = db.Column(db.String)
     state = db.Column(db.String)
     created_at = db.Column(db.DateTime)
