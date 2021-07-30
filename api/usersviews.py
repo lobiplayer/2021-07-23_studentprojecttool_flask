@@ -82,7 +82,7 @@ def user_info():
     print(user_id)
 
     get_user = User.query.filter_by(id = user_id['user_id']).first()
-
+    print(user_id)
     user_info = []
 
     user_info.append(get_user.name)
@@ -91,5 +91,8 @@ def user_info():
     print(user_info)
 
     return jsonify({'user_info': user_info})
+
+
+    
 
 

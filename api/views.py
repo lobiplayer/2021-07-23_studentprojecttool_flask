@@ -108,7 +108,7 @@ def deadline_homepage():
 # geting the Todo records from the database. here we have to make where todo.user_id == currentuser
     deadline = Deadline.query.filter_by(user_id = user_id['user_id']).limit(5)
     #this is the list that will be send to the react app:
-    deadline_homepage = [{'date': user_id['date_today'],'subject': 'Congratulations', 'description': 'for showing up and getting the work done!'}]
+                                                                                                             
     print(deadline_homepage)
 
 #every todo from the database will be formatted in a dictionary, this will be appended to the todos list (2 lines back)
